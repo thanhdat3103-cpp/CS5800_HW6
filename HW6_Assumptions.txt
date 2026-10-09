@@ -1,0 +1,3 @@
+Assumptions – School Facility Rental
+
+The activity diagram allows the renter to choose another date and time if the facility is unavailable, or stop the process. The sequence diagram assumes the submitted facility is available and focuses on approval, rejection, and payment outcomes. The Website records rental requests, rejections, and payment failures. The Payment Service processes charges without showing its internal operations. The Email Service sends confirmation, rejection, or payment failure notifications. A booking is saved only when the request is approved and payment succeeds.

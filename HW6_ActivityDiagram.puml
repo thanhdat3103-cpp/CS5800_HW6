@@ -1,0 +1,74 @@
+
+@startuml
+title School Facility Rental - Activity
+
+|Renter|
+start
+:Choose facility and date;
+:Select time and event type;
+
+|Website|
+:Check availability;
+
+while (Facility not available?) is ([not available])
+    :Show not available;
+
+    |Renter|
+    if (Choose another date?) then (yes)
+        :Choose another date and time;
+
+        |Website|
+        :Check availability;
+    else (no)
+        stop
+    endif
+endwhile ([available])
+
+|Renter|
+:Enter contact information;
+:Submit rental request;
+
+|Website|
+:Record request;
+
+|School Staff|
+:Review request;
+
+if (Request approved?) then ([approved])
+
+    |Website|
+    :Request payment;
+
+    |Payment Service|
+    :Charge renter;
+
+    |Website|
+    if (Payment successful?) then ([payment succeeds])
+        :Save booking;
+
+        |Email Service|
+        :Send confirmation email;
+
+        |Renter|
+        :Receive confirmation;
+        stop
+
+    else ([payment fails])
+        |Website|
+        :Record payment failure;
+
+        |Email Service|
+        :Send payment failure email;
+        stop
+    endif
+
+else ([rejected])
+    |Website|
+    :Record rejection;
+
+    |Email Service|
+    :Send rejection email;
+    stop
+endif
+
+@enduml
